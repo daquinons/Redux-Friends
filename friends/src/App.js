@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Header from './components/Header/Header';
-import AddEditFriend from './components/AddEditFriend/AddEditFriend';
-import FriendsList from './components/FriendsList/FriendsList';
+import Homepage from './components/Homepage/Homepage';
 import Login from './components/Login/Login';
 import './App.css';
 
@@ -14,22 +13,7 @@ function App(props) {
   return (
     <div className="App">
       <Header />
-      <Route
-        exact
-        path="/"
-        render={() => {
-          if (localStorage.getItem('token')) {
-            return (
-              <>
-                <AddEditFriend />
-                <FriendsList />
-              </>
-            );
-          }
-          return <Redirect to="login" />;
-        }}
-      />
-
+      <Route exact path="/" component={Homepage} />
       <Route path="/login" component={Login} />
     </div>
   );
