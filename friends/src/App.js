@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-//import * as actionCreators from "./state/actionCreators";
-import { login } from './state/actionCreators';
+import * as actionCreators from './state/actionCreators';
 import Header from './components/Header/Header';
 import AddEditFriend from './components/AddEditFriend/AddEditFriend';
 import FriendsList from './components/FriendsList/FriendsList';
@@ -67,6 +66,7 @@ function App(props) {
 
   useEffect(() => {
     props.login('Lambda School', 'i<3Lambd4');
+    props.getFriends();
   }, []);
 
   return (
@@ -79,7 +79,7 @@ function App(props) {
         onCancelEdit={cancelEdit}
       />
       <FriendsList
-        friends={friendsToDisplay}
+        friends={props.friendList}
         onDelete={deleteFriend}
         onClickEdit={chooseEditableFriend}
       />
@@ -99,5 +99,5 @@ export default connect(
   // STEP 10: CONNECT THE COMPONENT PASSING MAP STATE TO PROPS AS 1ST ARG
   mapStateToProps,
   // STEP 12: INJECT THE ACTION CREATORS AS 2ND ARG TO CONNECT
-  { login }
+  actionCreators
 )(App);

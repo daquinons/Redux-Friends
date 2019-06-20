@@ -32,7 +32,7 @@ export const login = (username, password) => dispatch => {
 };
 
 export const getFriends = () => dispatch => {
-  axiosImproved.get(API_URL + 'friends').then(res => {
+  axiosImproved().get(API_URL + 'friends').then(res => {
     dispatch(addFriends(res.data));
   });
 };
