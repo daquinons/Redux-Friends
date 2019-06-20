@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./components/Header/Header";
-import SearchFriend from "./components/SearchFriend/SearchFriend";
 import AddEditFriend from "./components/AddEditFriend/AddEditFriend";
 import FriendsList from "./components/FriendsList/FriendsList";
 import "./App.css";
