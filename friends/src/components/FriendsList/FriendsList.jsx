@@ -7,7 +7,7 @@ import FriendCard from "../FriendCard/FriendCard";
 const FriendsList = ({ getFriends, friends, deleteFriend, onClickEdit, onCancelEdit }) => {
   useEffect(() => {
     getFriends();
-  }, []);
+  }, [getFriends]);
 
   return (
     <>

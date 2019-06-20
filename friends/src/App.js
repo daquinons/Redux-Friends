@@ -45,7 +45,7 @@ function App(props) {
 
   useEffect(() => {
     props.login('Lambda School', 'i<3Lambd4');
-  }, []);
+  }, [props]);
 
   return (
     <div className="App">
