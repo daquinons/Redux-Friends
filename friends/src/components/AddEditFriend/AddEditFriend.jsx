@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { postFriend } from '../../state/actionCreators';
+import { postFriend, setEditableFriend } from '../../state/actionCreators';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -22,7 +22,7 @@ const StyledDiv = styled.div`
 `;
 
 const AddEditFriend = props => {
-  const { postFriend, editableFriend, onEditFriend, onCancelEdit } = props;
+  const { postFriend, editableFriend } = props;
   const [formInput, setFormInput] = useState({
     name: '',
     age: '',
@@ -46,7 +46,7 @@ const AddEditFriend = props => {
       email: formInput.email
     };
     if (editableFriend) {
-      onEditFriend(friend);
+      //onEditFriend(friend);
     } else {
       postFriend(friend);
     }
@@ -67,10 +67,14 @@ const AddEditFriend = props => {
     });
   };
 
+  const onCancelClick = () => {
+    props.setEditableFriend(undefined);
+  }
+
   const textTitle = editableFriend ? 'Edit Friend' : 'Add Friend';
 
   const cancelButton = editableFriend ? (
-    <button onClick={onCancelEdit}>Cancel</button>
+    <button onClick={onCancelClick}>Cancel</button>
   ) : null;
 
   return (
@@ -111,10 +115,11 @@ const AddEditFriend = props => {
 
 function mapStateToProps(state) {
   return {
+    editableFriend: state.friendForm.editableFriend
   };
 }
 
 export default connect(
   mapStateToProps,
-  { postFriend }
+  { postFriend, setEditableFriend }
 )(AddEditFriend);

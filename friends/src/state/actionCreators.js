@@ -18,6 +18,20 @@ export const setToken = token => {
   };
 };
 
+export const setEditableFriend = friend => {
+  if(friend) {
+    return {
+      type: types.SET_EDITABLE_FRIEND,
+      payload: friend
+    }
+  } else {
+    return {
+      type: types.SET_EDITABLE_FRIEND,
+      payload: undefined
+    }
+  }
+}
+
 export const login = (username, password) => dispatch => {
   const credentials = { username, password };
   axios

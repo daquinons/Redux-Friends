@@ -20,21 +20,6 @@ function App(props) {
     }
   };
 
-  const updateFriend = async friend => {
-    try {
-      console.log(`${URL}/${friend.id}`);
-      await axios.put(`${URL}/${friend.id}`, {
-        name: friend.name,
-        age: friend.age,
-        email: friend.email
-      });
-      //await getFriends();
-      cancelEdit();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const chooseEditableFriend = friend => {
     setEditableFriend(friend);
   };
@@ -53,8 +38,6 @@ function App(props) {
       <AddEditFriend
         onAddFriend={addNewFriend}
         editableFriend={editableFriend}
-        onEditFriend={updateFriend}
-        onCancelEdit={cancelEdit}
       />
       <FriendsList
         onClickEdit={chooseEditableFriend}

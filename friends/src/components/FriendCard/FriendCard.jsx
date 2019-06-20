@@ -1,5 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { connect } from 'react-redux';
+import { setEditableFriend } from '../../state/actionCreators';
+import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   background-color: white;
@@ -11,7 +13,6 @@ const StyledDiv = styled.div`
   border-radius: 4px;
   position: relative;
   cursor: pointer;
-
 
   #delete-button {
     position: absolute;
@@ -28,7 +29,7 @@ const StyledDiv = styled.div`
 `;
 
 const FriendCard = props => {
-  const { friend, onDelete, onClickEdit } = props;
+  const { friend, onDelete, setEditableFriend } = props;
 
   const onClickDelete = event => {
     event.stopPropagation();
@@ -36,7 +37,7 @@ const FriendCard = props => {
   };
 
   const onClickUpdate = () => {
-    onClickEdit(friend);
+    setEditableFriend(friend);
   };
 
   return (
@@ -51,4 +52,11 @@ const FriendCard = props => {
   );
 };
 
-export default FriendCard;
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(
+  mapStateToProps,
+  { setEditableFriend }
+)(FriendCard);

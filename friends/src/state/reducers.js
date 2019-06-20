@@ -18,7 +18,7 @@ export const friendList = (
 export const friendForm = (state = { editableFriend: undefined }, action) => {
   switch (action.type) {
     case types.SET_EDITABLE_FRIEND:
-      return action.payload;
+      return {editableFriend: action.payload};
     default:
       return state;
   }
