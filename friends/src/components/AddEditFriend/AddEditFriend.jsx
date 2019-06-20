@@ -47,6 +47,7 @@ const AddEditFriend = props => {
     };
     if (editableFriend) {
       props.updateFriend(friend);
+      props.setEditableFriend(undefined)
     } else {
       postFriend(friend);
     }
