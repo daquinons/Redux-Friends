@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getFriends, deleteFriend } from '../../state/actionCreators'
-import PropTypes from "prop-types";
-import FriendCard from "../FriendCard/FriendCard";
+import { getFriends, deleteFriend } from '../../state/actionCreators';
+import PropTypes from 'prop-types';
+import FriendCard from '../FriendCard/FriendCard';
 
-const FriendsList = ({ getFriends, friends, deleteFriend, onClickEdit, onCancelEdit }) => {
+const FriendsList = ({
+  getFriends,
+  friends,
+  deleteFriend,
+  onClickEdit,
+  onCancelEdit
+}) => {
   useEffect(() => {
     getFriends();
   }, [getFriends]);

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { postFriend } from '../../state/actionCreators';
+import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   background-color: white;
@@ -20,18 +22,18 @@ const StyledDiv = styled.div`
 `;
 
 const AddEditFriend = props => {
-  const { onAddFriend, editableFriend, onEditFriend, onCancelEdit } = props;
+  const { postFriend, editableFriend, onEditFriend, onCancelEdit } = props;
   const [formInput, setFormInput] = useState({
-    name: "",
-    age: "",
-    email: ""
+    name: '',
+    age: '',
+    email: ''
   });
 
   useEffect(() => {
     setFormInput({
-      name: editableFriend ? editableFriend.name : "",
-      age: editableFriend ? editableFriend.age : "",
-      email: editableFriend ? editableFriend.email : ""
+      name: editableFriend ? editableFriend.name : '',
+      age: editableFriend ? editableFriend.age : '',
+      email: editableFriend ? editableFriend.email : ''
     });
   }, [editableFriend]);
 
@@ -46,13 +48,13 @@ const AddEditFriend = props => {
     if (editableFriend) {
       onEditFriend(friend);
     } else {
-      onAddFriend(friend);
+      postFriend(friend);
     }
 
     setFormInput({
-      name: "",
-      age: "",
-      email: ""
+      name: '',
+      age: '',
+      email: ''
     });
   };
 
@@ -65,7 +67,7 @@ const AddEditFriend = props => {
     });
   };
 
-  const textTitle = editableFriend ? "Edit Friend" : "Add Friend";
+  const textTitle = editableFriend ? 'Edit Friend' : 'Add Friend';
 
   const cancelButton = editableFriend ? (
     <button onClick={onCancelEdit}>Cancel</button>
@@ -107,4 +109,12 @@ const AddEditFriend = props => {
   );
 };
 
-export default AddEditFriend;
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { postFriend }
+)(AddEditFriend);

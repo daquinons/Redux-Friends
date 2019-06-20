@@ -49,6 +49,17 @@ export const getFriends = () => dispatch => {
     });
 };
 
+export const postFriend = (friend) => dispatch => {
+  axiosImproved()
+    .post(API_URL + 'friends', friend)
+    .then(() => {
+      dispatch(getFriends());
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 export const deleteFriend = friend => dispatch => {
   axiosImproved()
     .delete(API_URL + 'friends/' + friend.id)
