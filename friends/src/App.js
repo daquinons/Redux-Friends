@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Homepage from './components/Homepage/Homepage';
 import Login from './components/Login/Login';
 import './App.css';
 
-function App(props) {
-  useEffect(() => {
-    //props.login('Lambda School', 'i<3Lambd4');
-  }, []);
-
+function App() {
   return (
     <div className="App">
       <Header />
