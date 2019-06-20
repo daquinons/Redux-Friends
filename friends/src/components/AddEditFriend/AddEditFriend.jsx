@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { postFriend, setEditableFriend } from '../../state/actionCreators';
+import { postFriend, setEditableFriend, updateFriend } from '../../state/actionCreators';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -46,7 +46,7 @@ const AddEditFriend = props => {
       email: formInput.email
     };
     if (editableFriend) {
-      //onEditFriend(friend);
+      props.updateFriend(friend);
     } else {
       postFriend(friend);
     }
@@ -121,5 +121,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { postFriend, setEditableFriend }
+  { postFriend, setEditableFriend, updateFriend }
 )(AddEditFriend);
