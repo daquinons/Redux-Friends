@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from 'react-redux';
+import { getFriends } from '../../state/actionCreators'
 import PropTypes from "prop-types";
 import FriendCard from "../FriendCard/FriendCard";
 
-const FriendsList = ({ friends, onDelete, onClickEdit, onCancelEdit }) => {
+const FriendsList = ({ getFriends, friends, onDelete, onClickEdit, onCancelEdit }) => {
+  useEffect(() => {
+    getFriends();
+  }, []);
+
   return (
     <>
       {friends.map(friend => (
@@ -28,4 +34,13 @@ FriendsList.propTypes = {
   ).isRequired
 };
 
-export default FriendsList;
+function mapStateToProps(state) {
+  return {
+    friends: state.friendList.friendList
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { getFriends }
+)(FriendsList);
