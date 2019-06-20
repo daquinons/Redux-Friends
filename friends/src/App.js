@@ -35,15 +35,6 @@ function App(props) {
     }
   };
 
-  const deleteFriend = async friend => {
-    try {
-      await axios.delete(`${URL}/${friend.id}`);
-      //await getFriends();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const chooseEditableFriend = friend => {
     setEditableFriend(friend);
   };
@@ -66,7 +57,6 @@ function App(props) {
         onCancelEdit={cancelEdit}
       />
       <FriendsList
-        onDelete={deleteFriend}
         onClickEdit={chooseEditableFriend}
       />
     </div>

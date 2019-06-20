@@ -18,6 +18,13 @@ export const setToken = token => {
   };
 };
 
+export const removeFriend = id => {
+  return {
+    type: types.DELETE_FRIEND,
+    payload: id
+  };
+};
+
 export const login = (username, password) => dispatch => {
   const credentials = { username, password };
   axios
@@ -32,7 +39,23 @@ export const login = (username, password) => dispatch => {
 };
 
 export const getFriends = () => dispatch => {
-  axiosImproved().get(API_URL + 'friends').then(res => {
-    dispatch(addFriends(res.data));
-  });
+  axiosImproved()
+    .get(API_URL + 'friends')
+    .then(res => {
+      dispatch(addFriends(res.data));
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const deleteFriend = friend => dispatch => {
+  axiosImproved()
+    .delete(API_URL + 'friends/' + friend.id)
+    .then(res => {
+      dispatch(getFriends());
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };

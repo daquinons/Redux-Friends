@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux';
-import { getFriends } from '../../state/actionCreators'
+import { getFriends, deleteFriend } from '../../state/actionCreators'
 import PropTypes from "prop-types";
 import FriendCard from "../FriendCard/FriendCard";
 
-const FriendsList = ({ getFriends, friends, onDelete, onClickEdit, onCancelEdit }) => {
+const FriendsList = ({ getFriends, friends, deleteFriend, onClickEdit, onCancelEdit }) => {
   useEffect(() => {
     getFriends();
   }, []);
@@ -15,7 +15,7 @@ const FriendsList = ({ getFriends, friends, onDelete, onClickEdit, onCancelEdit 
         <div key={friend.id} className="friend-info">
           <FriendCard
             friend={friend}
-            onDelete={onDelete}
+            onDelete={deleteFriend}
             onClickEdit={onClickEdit}
           />
         </div>
@@ -42,5 +42,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getFriends }
+  { getFriends, deleteFriend }
 )(FriendsList);
