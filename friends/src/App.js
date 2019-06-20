@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Header from "./components/Header/Header";
-import AddEditFriend from "./components/AddEditFriend/AddEditFriend";
-import FriendsList from "./components/FriendsList/FriendsList";
-import "./App.css";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+//import * as actionCreators from "./state/actionCreators";
+import { login } from './state/actionCreators';
+import Header from './components/Header/Header';
+import AddEditFriend from './components/AddEditFriend/AddEditFriend';
+import FriendsList from './components/FriendsList/FriendsList';
+import './App.css';
 
-function App() {
+function App(props) {
   const [friendList, setFriendList] = useState([]);
   const [friendsToDisplay, setFriendsToDisplay] = useState([]);
   const [editableFriend, setEditableFriend] = useState(undefined);
-  const URL = "http://localhost:5000/friends";
+  const URL = 'http://localhost:5000/friends';
 
   const getFriends = async () => {
     try {
@@ -63,13 +66,12 @@ function App() {
   };
 
   useEffect(() => {
-    getFriends();
+    props.login('Lambda School', 'i<3Lambd4');
   }, []);
 
   return (
     <div className="App">
-      <Header>
-      </Header>
+      <Header />
       <AddEditFriend
         onAddFriend={addNewFriend}
         editableFriend={editableFriend}
@@ -85,4 +87,17 @@ function App() {
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  // STEP 9: FLESH OUT
+  return {
+    friendList: state.friendList.friendList,
+    token: state.login.token
+  };
+}
+
+export default connect(
+  // STEP 10: CONNECT THE COMPONENT PASSING MAP STATE TO PROPS AS 1ST ARG
+  mapStateToProps,
+  // STEP 12: INJECT THE ACTION CREATORS AS 2ND ARG TO CONNECT
+  { login }
+)(App);

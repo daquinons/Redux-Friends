@@ -8,7 +8,7 @@ export const friendList = (
   action
 ) => {
   switch (action.type) {
-    case types.GET_ALL_FRIENDS:
+    case types.SET_ALL_FRIENDS:
       return { friendList: action.payload };
     case types.GET_FRIEND:
       return action.payload;
