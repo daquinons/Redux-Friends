@@ -10,14 +10,6 @@ export const friendList = (
   switch (action.type) {
     case types.SET_ALL_FRIENDS:
       return { friendList: action.payload };
-    case types.GET_FRIEND:
-      return action.payload;
-    case types.ADD_FRIEND:
-      return action.payload;
-    case types.DELETE_FRIEND:
-      return action.payload;
-    case types.UPDATE_FRIEND:
-      return action.payload;
     default:
       return state;
   }

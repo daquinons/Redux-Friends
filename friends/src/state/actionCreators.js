@@ -18,13 +18,6 @@ export const setToken = token => {
   };
 };
 
-export const removeFriend = id => {
-  return {
-    type: types.DELETE_FRIEND,
-    payload: id
-  };
-};
-
 export const login = (username, password) => dispatch => {
   const credentials = { username, password };
   axios
