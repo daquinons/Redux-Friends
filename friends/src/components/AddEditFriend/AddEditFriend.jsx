@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { postFriend, setEditableFriend, updateFriend } from '../../state/actionCreators';
+import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   background-color: white;
@@ -20,18 +22,18 @@ const StyledDiv = styled.div`
 `;
 
 const AddEditFriend = props => {
-  const { onAddFriend, editableFriend, onEditFriend, onCancelEdit } = props;
+  const { postFriend, editableFriend } = props;
   const [formInput, setFormInput] = useState({
-    name: "",
-    age: "",
-    email: ""
+    name: '',
+    age: '',
+    email: ''
   });
 
   useEffect(() => {
     setFormInput({
-      name: editableFriend ? editableFriend.name : "",
-      age: editableFriend ? editableFriend.age : "",
-      email: editableFriend ? editableFriend.email : ""
+      name: editableFriend ? editableFriend.name : '',
+      age: editableFriend ? editableFriend.age : '',
+      email: editableFriend ? editableFriend.email : ''
     });
   }, [editableFriend]);
 
@@ -44,15 +46,16 @@ const AddEditFriend = props => {
       email: formInput.email
     };
     if (editableFriend) {
-      onEditFriend(friend);
+      props.updateFriend(friend);
+      props.setEditableFriend(undefined)
     } else {
-      onAddFriend(friend);
+      postFriend(friend);
     }
 
     setFormInput({
-      name: "",
-      age: "",
-      email: ""
+      name: '',
+      age: '',
+      email: ''
     });
   };
 
@@ -65,10 +68,14 @@ const AddEditFriend = props => {
     });
   };
 
-  const textTitle = editableFriend ? "Edit Friend" : "Add Friend";
+  const onCancelClick = () => {
+    props.setEditableFriend(undefined);
+  }
+
+  const textTitle = editableFriend ? 'Edit Friend' : 'Add Friend';
 
   const cancelButton = editableFriend ? (
-    <button onClick={onCancelEdit}>Cancel</button>
+    <button onClick={onCancelClick}>Cancel</button>
   ) : null;
 
   return (
@@ -107,4 +114,13 @@ const AddEditFriend = props => {
   );
 };
 
-export default AddEditFriend;
+function mapStateToProps(state) {
+  return {
+    editableFriend: state.friendForm.editableFriend
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { postFriend, setEditableFriend, updateFriend }
+)(AddEditFriend);
